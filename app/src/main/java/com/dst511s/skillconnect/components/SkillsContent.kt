@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dst511s.skillconnect.data.models.Skill
+import com.dst511s.skillconnect.data.models.SkillLevel
+import com.dst511s.skillconnect.ui.theme.SkillConnectTheme
 
 @Composable
 fun SkillsContent(
@@ -45,18 +48,46 @@ fun SkillsContent(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun SkillsContentPreview() {
-//    SkillConnectTheme {
-//        SkillsContent(
-//            skills = listOf(
-//                Skill("JavaScript", "Intermediate", true),
-//                Skill("HTML/CSS", "Advanced", false),
-//                Skill("Python", "Intermediate", false),
-//                Skill("React", "Beginner", false)
-//            ),
-//            onSkillClick = {}
-//        )
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun SkillsContentPreview() {
+    SkillConnectTheme {
+        SkillsContent(
+            skills = listOf(
+                Skill(
+                    id = "1",
+                    name = "JavaScript",
+                    level = SkillLevel.INTERMEDIATE,
+                    isVerified = true,
+                    verificationDate = null,
+                    category = "Programming"
+                ),
+                Skill(
+                    id = "2",
+                    name = "HTML/CSS",
+                    level = SkillLevel.ADVANCED,
+                    isVerified = false,
+                    verificationDate = null,
+                    category = "Web Development"
+                ),
+                Skill(
+                    id = "3",
+                    name = "Python",
+                    level = SkillLevel.INTERMEDIATE,
+                    isVerified = false,
+                    verificationDate = null,
+                    category = "Programming"
+                ),
+                Skill(
+                    id = "4",
+                    name = "React",
+                    level = SkillLevel.BEGINNER,
+                    isVerified = false,
+                    verificationDate = null,
+                    category = "Frontend"
+                )
+            ),
+            onSkillClick = {}
+        )
+    }
+}

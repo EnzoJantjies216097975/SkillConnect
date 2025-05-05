@@ -19,8 +19,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dst511s.skillconnect.data.models.Experience
+import com.dst511s.skillconnect.ui.theme.SkillConnectTheme
 
 @Composable
 fun ExperienceItem(
@@ -90,12 +92,25 @@ fun ExperienceItem(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun ExperienceItemPreview() {
-//    SkillConnectTheme {
-//        ExperienceItem(
-//            experience = Experience("Web Development Intern", "TechStartup Namibia", "Jan 2024 - Mar 2024", false)
-//        )
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun ExperienceItemPreview() {
+    SkillConnectTheme {
+        ExperienceItem(
+            experience = Experience(
+                id = "",
+                company = "TechStartup Namibia",
+                position = "",
+                location = "",
+                startDate = 0,
+                endDate = null,
+                isCurrentPosition = false,
+                description = "",
+                skills = emptyList(),
+                role = "Web Development Intern",
+                period = "Jan 2024 - Mar 2024",
+                isCurrentRole = false
+            )
+        )
+    }
+}

@@ -22,9 +22,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.dst511s.skillconnect.data.models.Project
+import com.dst511s.skillconnect.ui.theme.SkillConnectTheme
 
 @Composable
 fun ProjectItem(
@@ -81,21 +83,21 @@ fun ProjectItem(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun ProjectItemPreview() {
-//    SkillConnectTheme {
-//        ProjectItem(
-//            project = Project(
-//                "E-commerce Website",
-//                "Built a responsive e-commerce site with JavaScript, HTML and CSS",
-//                "",
-//                "",
-//                "null",
-//                "",
-//                "",
-//                "null",
-//                )
-//        )
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun ProjectItemPreview() {
+    SkillConnectTheme {
+        ProjectItem(
+            project = Project(
+                id = "",
+                title = "E-commerce Website",
+                description = "Built a responsive e-commerce site with JavaScript, HTML and CSS",
+                url = "",
+                imageUrls = emptyList(),
+                skills = emptyList(),
+                date = 0,
+                imageUrl = null
+            )
+        )
+    }
+}

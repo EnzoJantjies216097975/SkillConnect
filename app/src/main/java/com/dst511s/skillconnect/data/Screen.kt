@@ -1,4 +1,4 @@
-package com.dst511s.dst_skillconnect.data
+package com.dst511s.skillconnect.data
 
 sealed class Screen(val route: String) {
     object Onboarding : Screen("onboarding")
