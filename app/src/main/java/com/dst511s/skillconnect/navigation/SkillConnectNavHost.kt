@@ -3,69 +3,57 @@ package com.dst511s.skillconnect.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
-import com.dst511s.skillconnect.data.Screen
-import com.dst511s.skillconnect.screens.auth.LoginScreen
-import com.dst511s.skillconnect.screens.auth.RegisterScreen
-import com.dst511s.skillconnect.screens.auth.UserTypeSelectionScreen
-import com.dst511s.skillconnect.screens.home.HomeScreen
-import com.dst511s.skillconnect.screens.jobs.JobDetailScreen
-import com.dst511s.skillconnect.screens.jobs.JobsScreen
-import com.dst511s.skillconnect.screens.onboarding.OnboardingScreen
-import com.dst511s.skillconnect.screens.profile.ProfileScreen
-import com.dst511s.skillconnect.screens.skills.SkillAssessmentScreen
-import com.dst511s.skillconnect.screens.workshop.WorkshopsScreen
+import com.dst511s.skillconnect.features.auth.screens.LoginScreen
+import com.dst511s.skillconnect.features.auth.screens.RegisterScreen
+import com.dst511s.skillconnect.features.auth.screens.UserTypeSelectionScreen
+import com.dst511s.skillconnect.features.home.screens.HomeScreen
+import com.dst511s.skillconnect.features.jobs.screens.JobDetailScreen
+import com.dst511s.skillconnect.features.jobs.screens.JobsScreen
+import com.dst511s.skillconnect.features.onboarding.screens.OnboardingScreen
+import com.dst511s.skillconnect.features.profile.screens.ProfileScreen
+import com.dst511s.skillconnect.features.skills.screens.SkillAssessmentScreen
+import com.dst511s.skillconnect.features.workshops.screens.WorkshopsScreen
 
 @Composable
 fun SkillConnectNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-
     NavHost(
         navController = navController,
         startDestination = Screen.Onboarding.route,
         modifier = modifier
     ) {
-        composable(Screen.Onboarding.route) {
+        composable(route = Screen.Onboarding.route) {
             OnboardingScreen(
                 onGetStartedClick = { navController.navigate(Screen.Register.route) },
                 onLoginClick = { navController.navigate(Screen.Login.route) }
             )
         }
 
-        composable(Screen.Login.route) {
+        composable(route = Screen.Login.route) {
             LoginScreen(
-                onLoginSuccess = {
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.Login.route) { inclusive = true }
-                    }
-                },
+                onLoginSuccess = { navController.navigate(Screen.Home.route) },
                 onRegisterClick = { navController.navigate(Screen.Register.route) }
             )
         }
 
-        composable(Screen.Register.route) {
+        composable(route = Screen.Register.route) {
             RegisterScreen(
                 onRegisterSuccess = { navController.navigate(Screen.UserTypeSelection.route) },
                 onLoginClick = { navController.navigate(Screen.Login.route) }
             )
         }
 
-        composable(Screen.UserTypeSelection.route) {
+        composable(route = Screen.UserTypeSelection.route) {
             UserTypeSelectionScreen(
-                onUserTypeSelected = { userType ->
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.Onboarding.route) { inclusive = true }
-                    }
-                }
+                onUserTypeSelected = { navController.navigate(Screen.Home.route) }
             )
         }
 
-        composable(Screen.Home.route) {
+        composable(route = Screen.Home.route) {
             HomeScreen(
                 onNavigateToJobs = { navController.navigate(Screen.Jobs.route) },
                 onNavigateToWorkshops = { navController.navigate(Screen.Workshops.route) },
@@ -73,56 +61,46 @@ fun SkillConnectNavHost(
             )
         }
 
-        composable(Screen.Profile.route) {
+        composable(route = Screen.Profile.route) {
             ProfileScreen(
-                onNavigateBack = { navController.popBackStack() },
+                onNavigateBack = { navController.navigateUp() },
                 onSkillAssessmentClick = { skillId ->
                     navController.navigate(Screen.SkillAssessment.createRoute(skillId))
                 }
             )
         }
 
-        composable(Screen.Jobs.route) {
+        composable(route = Screen.Jobs.route) {
             JobsScreen(
                 onJobClick = { jobId ->
                     navController.navigate(Screen.JobDetail.createRoute(jobId))
                 },
-                onNavigateBack = { navController.popBackStack() }
+                onNavigateBack = { navController.navigateUp() }
             )
         }
 
-        composable(
-            route = Screen.JobDetail.route,
-            arguments = listOf(navArgument("jobId") { type = NavType.StringType })
-        ) { backStackEntry ->
+        composable(route = Screen.JobDetail.route) { backStackEntry ->
             val jobId = backStackEntry.arguments?.getString("jobId") ?: ""
             JobDetailScreen(
                 jobId = jobId,
-                onNavigateBack = { navController.popBackStack() },
-                onApplyClick = { /* Handle application */ }
+                onNavigateBack = { navController.navigateUp() },
+                onApplyClick = { /* Handle job application */ }
             )
         }
 
-        composable(
-            route = Screen.SkillAssessment.route,
-            arguments = listOf(navArgument("skillId") { type = NavType.StringType })
-        ) { backStackEntry ->
+        composable(route = Screen.SkillAssessment.route) { backStackEntry ->
             val skillId = backStackEntry.arguments?.getString("skillId") ?: ""
             SkillAssessmentScreen(
                 skillId = skillId,
-                onNavigateBack = { navController.popBackStack() },
-                onAssessmentComplete = {
-                    navController.navigate(Screen.Profile.route) {
-                        popUpTo(Screen.Profile.route) { inclusive = true }
-                    }
-                }
+                onNavigateBack = { navController.navigateUp() },
+                onAssessmentComplete = { navController.navigate(Screen.Profile.route) }
             )
         }
 
-        composable(Screen.Workshops.route) {
+        composable(route = Screen.Workshops.route) {
             WorkshopsScreen(
-                onNavigateBack = { navController.popBackStack() },
-                onWorkshopClick = { /* Handle workshop details */ }
+                onNavigateBack = { navController.navigateUp() },
+                onWorkshopClick = { /* Handle workshop selection */ }
             )
         }
     }
