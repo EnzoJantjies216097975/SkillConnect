@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "914031407126",
+    "project_id": "skillconnect-e88b4",
+    "storage_bucket": "skillconnect-e88b4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914031407126:android:4c2a4fe3981ab170218537",
+        "android_client_info": {
+          "package_name": "com.dst511s.skillconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHiuGrKUJVngmyW8oZhio9bRFxD6Edu5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
